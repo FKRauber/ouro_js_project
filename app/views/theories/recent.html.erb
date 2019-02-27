@@ -1,0 +1,18 @@
+<h1>Most Recent Theories</h1>
+
+<!-- list 3 theories and link to treasure show page -->
+<table class="box" align="center">
+	<tr>
+		<th>Theory Name</th>
+		<th>Created By</th>
+		<th>Treasure Name</th>
+	</tr>
+
+	<% @theories.each do |t| %>
+		<tr>
+			<td><%= t.name %></td>
+			<td><%= t.user.username %></td>
+			<td><%= link_to "#{t.treasure.name}", treasure_path(t.treasure) %></td>
+		</tr>
+	<% end %>
+</table><br>

@@ -1,0 +1,18 @@
+<p id="notice"><h1><%= notice %></h1></p>
+
+<% if @message %>
+	<div class="center alert">
+		<p><%= @message %></p>
+	</div>
+<% end %>
+
+<div class="center">
+	<div class="info">
+		<% if @user.admin %>
+			<p><strong>ADMIN</strong></p>
+		<% end %><br>
+		<p><strong>NAME: </strong><%= @user.username %></p>
+		<p><strong>EMAIL: </strong><%= @user.email %></p><br>
+		<p><%= link_to 'Edit', edit_user_path(@user) %></p>
+	</div>
+</div>

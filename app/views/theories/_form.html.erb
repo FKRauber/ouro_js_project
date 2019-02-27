@@ -1,0 +1,40 @@
+<%= form_for [@treasure, @theory] do |f| %>
+	<% if @theory.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@theory.errors.count, "error") %> prohibited this theory from being saved:</h2>
+			<ul>
+				<% @theory.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+
+	<div class="form-group">
+		<%= f.label :name %><br><%= f.text_field :name, class: "form-control" %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :description %><br><%= f.text_field :description, class: "form-control" %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :issues %><br><%= f.text_field :issues, class: "form-control" %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :success %><br><%= f.check_box :success, class: "form-control" %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :prove_date %><br><%= f.date_field :prove_date, class: "form-control" %>
+	</div><br>
+
+		<%= f.hidden_field :user_id, :value => current_user.id %>
+
+	<div class="actions">
+		<%= f.submit "Add Theory" %>
+	</div>
+
+<% end %>
