@@ -1,3 +1,3 @@
 class TheoryTreasureSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name, :description, :user_id
 end

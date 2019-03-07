@@ -2,12 +2,20 @@ class TreasuresController < ApplicationController
 
   def index
     @treasures = Treasure.all
+    respond_to do |f|
+      f.html {render :index}
+      f.json {render json: @treasures}
+    end
   end
 
   def show
     treasure
     theory
     @theories = Theory.all
+    respond_to do |f|
+      f.html {render :show}
+      f.json {render json: @treasure.to_json(only: [:id, :name, :description], include: [theory: {only: [:id, :name, :description, :issues, :success, :prove_date]}])}
+    end
   end
 
   def new
