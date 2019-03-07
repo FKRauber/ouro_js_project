@@ -7,5 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Easy Seed Setup
-# Treasure.create(user_id: "", name: "", description: "")
+# Treasure.create(user_id: "", name: "", description: "") // treasure_id: 1
 # Theory.create(user_id: "", treasure_id: "", name: "", description: "", issues: "", success: "", prove_date: "")
