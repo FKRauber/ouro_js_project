@@ -14,7 +14,7 @@
       <tr>
         <td><%= treasure.name %></td>
         <td><%= treasure.description %></td>
-        <td><button id="theory-btn" type="button" name="button">Show Theories</button></td>
+        <td><button id="theory-data" type="button" name="button">Show Theories</button></td>
 
         <% if current_user.admin %>
           <td><%= link_to "Show #{treasure.name}", treasure_path(treasure) %></td>
