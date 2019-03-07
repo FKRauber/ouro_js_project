@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# Easy Seed Setup
+# Treasure.create(user_id: "", name: "", description: "")
+# Theory.create(user_id: "", treasure_id: "", name: "", description: "", issues: "", success: "", prove_date: "")
