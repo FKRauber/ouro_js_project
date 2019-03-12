@@ -16,8 +16,8 @@
  *= require_self
  */
 
-@import 'bootstrap';
-@import 'bootstrap-sprockets';
+/* @import 'bootstrap';
+@import 'bootstrap-sprockets'; */
 
 body {
 	padding: 70px, 0;

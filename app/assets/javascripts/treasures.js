@@ -12,13 +12,18 @@ function listenForClick() {
 
 function getTheories() {
   $.ajax({
-    url: '',
+    url: 'http://localhost:3000/treasures',
     method: 'get',
     dataType: 'json'
   }).done(function(data) {
     console.log("the data is...", data)
 
-    let
+    let myTreasure = new Treasure(data[0])
+    debugger
+    
+    let myTreasureHTML = myTreasure.postHTML()
+    $('div#ajax-treasures').html(myTreasureHTML)
+    document.getElementById('ajax-treasures').innerHTML += myTreasureHTML
   })
 }
 
@@ -32,10 +37,24 @@ class Treasure {
 }
 
 Treasure.prototype.postHTML = function() {
+
+  let treasureTheories = this.theories.map(theory => {
+    if (success = true) {
+      return (`
+        <p>${theory.name}</p>
+        <p style="color:red;"><i>Solved!</i></p>
+      `)
+    } else {
+      return (`
+        <p>${theory.name}</p>
+        <p>Unsolved</p>
+      `)
+    }
+  }).join('')
+
   return (`
     <div>
-      <p><strong>$(this.name)</strong></p>
-      <p>$(this.description)</p>
+      <p>${treasureTheories}</p>
     </div>
   `)
 }
