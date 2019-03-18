@@ -14,15 +14,9 @@
       <tr>
         <td><%= treasure.name %></td>
         <td><%= treasure.description %></td>
-        <td>
-          <button id="theory-data" type="button" name="button" style="white-space: nowrap; overflow: hidden;">Show Theories</button>
-          <div id="ajax-treasures">
-
-          </div>
-        </td>
 
         <% if current_user.admin %>
-          <td><%= link_to "Show #{treasure.name}", treasure_path(treasure) %></td>
+          <td><%= link_to "Show #{treasure.name}", treasure_path(treasure)%></td>
           <td><%= link_to "Delete #{treasure.name}", treasure_path(treasure), method: :delete, data: { confirm: "Are you sure you want to delete #{treasure.name}?" } %></td>
         <% else %>
           <td><%= link_to "Find #{treasure.name}", treasure_path(treasure) %></td>
@@ -30,7 +24,12 @@
 
       </tr><br>
     <% end %>
+
   </tbody>
 </table><br>
 
-<p><%= link_to "New Treasure", new_treasure_path %> | <%= link_to "Most Recent Theories", "/recent" %></p>
+<p><button id="ajax-theory-data" type="button" name="button" style="white-space: nowrap; overflow: hidden;">Show Theories</button> | <button id="ajax-new-treasure" type="button" name="button" style="white-space: nowrap; overflow: hidden;">New Treasure</button> | <%= link_to "Most Recent Theories", "/recent" %></p><br>
+
+<div id="ajax-new-treasure-form"></div>
+
+<div id="ajax-treasures"></div>

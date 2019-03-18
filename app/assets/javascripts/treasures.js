@@ -1,31 +1,40 @@
 $(function() {
   console.log("treasures.js loaded")
   listenForClick()
+  listenForNewFormClick()
 });
 
 function listenForClick() {
-  $('button#theory-data').on('click', function(event) {
+  $('button#ajax-theory-data').on('click', function(event) {
     event.preventDefault()
-    getTheories()
+    getTreasures()
   })
 }
 
-function getTheories() {
+function listenForNewFormClick() {
+  $('button#ajax-new-treasure').on('click', function(event) {
+    event.preventDefault()
+    let newTreasureForm = Treasure.newTreasureForm()
+    document.querySelector('div#ajax-new-treasure-form').innerHTML = newTreasureForm
+  })
+}
+
+function getTreasures() {
   $.ajax({
     url: 'http://localhost:3000/treasures',
     method: 'get',
     dataType: 'json'
   }).done(function(data) {
     console.log("the data is...", data)
-
-    let myTreasure = new Treasure(data[0])
-    debugger
-    
-    let myTreasureHTML = myTreasure.postHTML()
-    $('div#ajax-treasures').html(myTreasureHTML)
-    document.getElementById('ajax-treasures').innerHTML += myTreasureHTML
+    for (var i = 0; i < data.length; i++) {
+      let myTreasure = new Treasure(data[i])
+      let myTreasureHTML = myTreasure.postHTML()
+      $('div#ajax-treasures').html(myTreasureHTML)
+      document.getElementById('ajax-treasures').innerHTML = myTreasureHTML
+    }
   })
 }
+
 
 class Treasure {
   constructor(obj) {
@@ -34,26 +43,30 @@ class Treasure {
     this.description = obj.description
     this.theories = obj.theories
   }
+
+  static newTreasureForm() {
+    return (`
+      <strong>New Treasure Form</strong>
+      <form>
+        <input id="treasure-title" type="text" name="title" placeholder="Name"></input><br>
+        <input type="text" name="description" placeholder="Description"></input><br>
+        <input type="submit" />
+      </form>
+    `)
+  }
 }
 
 Treasure.prototype.postHTML = function() {
 
   let treasureTheories = this.theories.map(theory => {
-    if (success = true) {
-      return (`
-        <p>${theory.name}</p>
-        <p style="color:red;"><i>Solved!</i></p>
-      `)
-    } else {
-      return (`
-        <p>${theory.name}</p>
-        <p>Unsolved</p>
-      `)
-    }
+    return (`
+      <p>${theory.name}</p>
+    `)
   }).join('')
 
   return (`
     <div>
+      <p><strong>${this.name}</strong></p>
       <p>${treasureTheories}</p>
     </div>
   `)
