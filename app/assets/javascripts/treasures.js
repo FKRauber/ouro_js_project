@@ -2,6 +2,7 @@ $(function() {
   console.log("treasures.js loaded")
   listenForClick()
   listenForNewFormClick()
+  listenForNextClick()
 });
 
 function listenForClick() {
@@ -19,6 +20,13 @@ function listenForNewFormClick() {
   })
 }
 
+function listenForNextClick() {
+  $('button#ajax-next-treasure').on('click', function(event) {
+    event.preventDefault()
+    getNextTreasure()
+  })
+}
+
 function getTreasures() {
   $.ajax({
     url: 'http://localhost:3000/treasures',
@@ -27,26 +35,36 @@ function getTreasures() {
   }).done(function(data) {
     console.log("the data is...", data)
 
-    var id = $(this).data("id");
-    $.get("/theories/" + id + ".json", function(json) {
-      let successText = "<strong>Solved!</strong>";
-      if(json['success'] != true){
-        successText = "Active";
-      }
-      let theoryText = "<p>" + json['theory.name'] + "</p><p>" + successText + "</p>"
-      $(id).html(theoryText);
-    });
+    // var id = $(this).data("id");
+    // $.get("/theories/" + id + ".json", function(json) {
+    //   let theoryText = "<p>" + json['theory.name'] + "</p>"
+    //   $(id).html(theoryText);
+    // });
 
-    // for (var i = 0; i < data.length; i++) {
-    //   let myTreasure = new Treasure(data[i])
-    //   let myTreasureHTML = myTreasure.postHTML()
-    //   $('div#ajax-treasures').html(myTreasureHTML)
-    //   document.getElementById('ajax-treasures').innerHTML = myTreasureHTML
-    // }
+    for (var i = 0; i < data.length; i++) {
+      let myTreasure = new Treasure(data[0])
+      let myTreasureHTML = myTreasure.postHTML()
+      $('div#ajax-treasures').html(myTreasureHTML)
+      document.getElementById('ajax-treasures').innerHTML = myTreasureHTML
+    }
 
   })
 }
 
+function getNextTreasure() {
+  $.ajax({
+    url: 'http://localhost:3000/treasures',
+    method: 'get',
+    dataType: 'json'
+  }).done(function(data) {
+    console.log("the data is...", data)
+    var nextId = parseInt($("#ajax-next-treasure").attr("data-id")) + 1;
+    debugger;
+    $.get("/treasures/" + nextId + ".json", function(data) {
+      $("#ajax-next-treasure").attr("data-id", data["id"]);
+    });
+  });
+}
 
 class Treasure {
   constructor(obj) {
