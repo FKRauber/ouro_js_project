@@ -8,12 +8,14 @@
     <tr>
       <td><strong>Name</strong></td>
       <td><strong>Description</strong></td>
+      <td></td>
     </tr>
 
     <% @treasures.each do |treasure| %>
       <tr>
         <td><%= treasure.name %></td>
         <td><%= treasure.description %></td>
+        <td><button id="ajax-theory-data" type="button" name="button" style="white-space: nowrap; overflow: hidden;">More</button></td>
 
         <% if current_user.admin %>
           <td><%= link_to "Show #{treasure.name}", treasure_path(treasure)%></td>
@@ -28,7 +30,7 @@
   </tbody>
 </table><br>
 
-<p><button id="ajax-theory-data" type="button" name="button" style="white-space: nowrap; overflow: hidden;">Show Theories</button> | <button id="ajax-new-treasure" type="button" name="button" style="white-space: nowrap; overflow: hidden;">New Treasure</button> | <%= link_to "Most Recent Theories", "/recent" %></p><br>
+<p><button id="ajax-new-treasure" type="button" name="button" style="white-space: nowrap; overflow: hidden;">New Treasure</button> | <%= link_to "Most Recent Theories", "/recent" %></p><br>
 
 <div id="ajax-new-treasure-form"></div>
 

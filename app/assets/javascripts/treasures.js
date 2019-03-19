@@ -26,12 +26,24 @@ function getTreasures() {
     dataType: 'json'
   }).done(function(data) {
     console.log("the data is...", data)
-    for (var i = 0; i < data.length; i++) {
-      let myTreasure = new Treasure(data[i])
-      let myTreasureHTML = myTreasure.postHTML()
-      $('div#ajax-treasures').html(myTreasureHTML)
-      document.getElementById('ajax-treasures').innerHTML = myTreasureHTML
-    }
+
+    var id = $(this).data("id");
+    $.get("/theories/" + id + ".json", function(json) {
+      let successText = "<strong>Solved!</strong>";
+      if(json['success'] != true){
+        successText = "Active";
+      }
+      let theoryText = "<p>" + json['theory.name'] + "</p><p>" + successText + "</p>"
+      $(id).html(theoryText);
+    });
+
+    // for (var i = 0; i < data.length; i++) {
+    //   let myTreasure = new Treasure(data[i])
+    //   let myTreasureHTML = myTreasure.postHTML()
+    //   $('div#ajax-treasures').html(myTreasureHTML)
+    //   document.getElementById('ajax-treasures').innerHTML = myTreasureHTML
+    // }
+
   })
 }
 
