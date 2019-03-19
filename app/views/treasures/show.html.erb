@@ -34,6 +34,6 @@
       <% end %>
     </table><br>
 
-    <%= link_to 'Edit', [:edit, @treasure] %> | <%= link_to 'Create Theory', new_treasure_theory_path(@treasure.id) %>
+    <%= link_to 'Edit', [:edit, @treasure] %> | <%= link_to 'Create Theory', new_treasure_theory_path(@treasure.id) %> | <button id="ajax-next-treasure" type="button" name="button" style="white-space: nowrap; overflow: hidden;">Next Treasure</button>
   </div>
 </div>
