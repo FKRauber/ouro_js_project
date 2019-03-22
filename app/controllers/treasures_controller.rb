@@ -23,13 +23,10 @@ class TreasuresController < ApplicationController
     @treasure.theories.build
   end
   def create
-    @treasure = Treasure.new(treasure_params)
+    @treasure = Treasure.create(treasure_params)
     @treasure.user_id = current_user.id
-    if @treasure.save
-      redirect_to @treasure, notice: "Treasure was successfully saved"
-    else
-      render :new
-    end
+
+    render json: @treasure, status: 201
   end
 
   def edit
