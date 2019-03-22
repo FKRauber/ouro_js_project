@@ -1,9 +1,22 @@
 $(() => {
   console.log("treasures.js loaded")
+
+  bindClickHandlers()
   attachListeners();
   // listenForNewFormClick()
   // listenForNextClick()
 });
+
+const bindClickHandlers = () => {
+  $('.all_treasures').on('click', (e) => {
+    e.preventDefault();
+    console.log('default prevented at all_treasures');
+
+    fetch(`/treasures.json`)
+      .then(res => res.json())
+        .then(data => data)
+  });
+}
 
 function attachListeners() {
   $('button#ajax-theory-data').on('click', () => getTreasures());
