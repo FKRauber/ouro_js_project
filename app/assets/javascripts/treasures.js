@@ -1,9 +1,14 @@
 $(function() {
   console.log("treasures.js loaded")
-  listenForClick()
-  listenForNewFormClick()
-  listenForNextClick()
+  attachListeners();
+  // listenForClick()
+  // listenForNewFormClick()
+  // listenForNextClick()
 });
+
+function attachListeners() {
+  $('button#ajax-theory-data').on('click', () => getTreasures())
+}
 
 function listenForClick() {
   $('button#ajax-theory-data').on('click', function(event) {
@@ -75,14 +80,20 @@ class Treasure {
   }
 
   static newTreasureForm() {
-    return (`
-      <strong>New Treasure Form</strong>
-      <form>
-        <input id="treasure-title" type="text" name="title" placeholder="Name"></input><br>
-        <input type="text" name="description" placeholder="Description"></input><br>
-        <input type="submit" />
-      </form>
-    `)
+    $.ajax({
+      url: 'http://localhost:3000/treasures',
+      method: 'post',
+      dataType: 'json'
+    }).done(function(data) {
+      return (`
+        <strong>New Treasure Form</strong>
+        <form>
+          <input id="treasure-title" type="text" name="title" placeholder="Name"></input><br>
+          <input type="text" name="description" placeholder="Description"></input><br>
+          <input type="submit" />
+        </form>
+      `)
+    });
   }
 }
 
