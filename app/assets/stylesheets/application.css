@@ -48,8 +48,9 @@ body {
 
 .navbar ul li {
 	text-decoration: none;
-	display: inline-block;
+	display: inline;
 	padding-right: 30px;
+	white-space: nowrap;
 }
 
 /* APP MAIN CONTAINER */

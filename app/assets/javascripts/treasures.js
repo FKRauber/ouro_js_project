@@ -2,7 +2,7 @@ $(() => {
   console.log("treasures.js loaded")
 
   bindClickHandlers()
-  attachListeners();
+  // attachListeners();
   // listenForNewFormClick()
   // listenForNextClick()
 });
@@ -24,13 +24,21 @@ const bindClickHandlers = () => {
           });
         });
   });
+
+  $(document).on('click', ".show_link", function(e) {
+    // above assigns parent as show_link is not in DOM until we click it
+    e.preventDefault();
+    console.log('default prevented at show_link');
+    console.log(this);
+    fetch(`/treasures.json`)
+  });
 }
 
-function attachListeners() {
-  $('button#ajax-theory-data').on('click', () => getTreasures());
-  $('button#ajax-new-treasure').on('click', () => newTreasureForm());
-  $('button#ajax-next-treasure').on('click', () => getNextTreasure());
-}
+// function attachListeners() {
+//   $('button#ajax-theory-data').on('click', () => getTreasures());
+//   $('button#ajax-new-treasure').on('click', () => newTreasureForm());
+//   $('button#ajax-next-treasure').on('click', () => getNextTreasure());
+// }
 
 // function listenForNewFormClick() {
 //   $('button#ajax-new-treasure').on('click', function(event) {
