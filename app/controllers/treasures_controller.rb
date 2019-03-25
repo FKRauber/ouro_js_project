@@ -1,4 +1,5 @@
 class TreasuresController < ApplicationController
+  before_action :set_treasure, only: [:show, :edit, :update, :destroy]
 
   def index
     @treasures = Treasure.all
@@ -9,12 +10,11 @@ class TreasuresController < ApplicationController
   end
 
   def show
-    treasure
-    theory
+    set_theory
     @theories = Theory.all
     respond_to do |f|
-      f.html {render :show}
-      f.json {render json: @treasure.to_json(only: [:id, :name, :description], include: [theory: {only: [:id, :name, :description, :issues, :success, :prove_date]}])}
+      f.html
+      f.json {render json: @treasure}
     end
   end
 
@@ -25,15 +25,12 @@ class TreasuresController < ApplicationController
   def create
     @treasure = Treasure.create(treasure_params)
     @treasure.user_id = current_user.id
-
     render json: @treasure, status: 201
   end
 
   def edit
-    treasure
   end
   def update
-    treasure
     if treasure.update(treasure_params)
       redirect_to treasure_path, notice: "Treasure was successfully updated"
     else
@@ -42,17 +39,19 @@ class TreasuresController < ApplicationController
   end
 
   def destroy
-    treasure.destroy
+    @treasure.destroy
     redirect_to treasures_url, notice: "Treasure was successfully destroyed"
   end
 
+
+
   private
 
-  def treasure
+  def set_treasure
     @treasure = Treasure.find_by(id: params[:id])
   end
 
-  def theory
+  def set_theory
     @theory = Theory.find_by(id: params[:id])
   end
 

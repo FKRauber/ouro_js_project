@@ -120,7 +120,7 @@ function Treasure(treasure) {
 
 Treasure.prototype.formatIndex = function() {
   let treasureHTML = `
-    <a href="/treasures/${this.id}">${this.name}</a>
+    <a href="/treasures/${this.id}" class="show_link">${this.name}</a><br><br><br>
     `
 
   return treasureHTML;
