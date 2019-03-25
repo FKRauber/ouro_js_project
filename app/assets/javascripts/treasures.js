@@ -10,11 +10,19 @@ $(() => {
 const bindClickHandlers = () => {
   $('.all_treasures').on('click', (e) => {
     e.preventDefault();
+    history.pushState(null, null, "treasures_list");
     console.log('default prevented at all_treasures');
 
     fetch(`/treasures.json`)
       .then(res => res.json())
-        .then(data => data)
+        .then(treasures => {
+          $('#app-container').html('')
+          treasures.forEach(treasure => {
+            let newTreasure = new Treasure(treasure)
+            let treasureHTML = newTreasure.formatIndex();
+            $('#app-container').append(treasureHTML);
+          });
+        });
   });
 }
 
@@ -102,27 +110,34 @@ function newTreasureForm() {
     });
   }
 
-class Treasure {
-  constructor(obj) {
-    this.id = obj.id
-    this.name = obj.name
-    this.description = obj.description
-    this.theories = obj.theories
-  }
+function Treasure(treasure) {
+  this.id = treasure.id
+  this.name = treasure.name
+  this.description = treasure.description
+  this.user_id = treasure.user_id
+  this.theories = treasure.theories
 }
 
-Treasure.prototype.postHTML = function() {
+Treasure.prototype.formatIndex = function() {
+  let treasureHTML = `
+    <a href="/treasures/${this.id}">${this.name}</a>
+    `
 
-  let treasureTheories = this.theories.map(theory => {
-    return (`
-      <p>${theory.name}</p>
-    `)
-  }).join('')
-
-  return (`
-    <div>
-      <p><strong>${this.name}</strong></p>
-      <p>${treasureTheories}</p>
-    </div>
-  `)
+  return treasureHTML;
 }
+
+//
+//
+//   let treasureTheories = this.theories.map(theory => {
+//     return (`
+//       <p>${theory.name}</p>
+//     `)
+//   }).join('')
+//
+//   return (`
+//     <div>
+//       <p><strong>${this.name}</strong></p>
+//       <p>${treasureTheories}</p>
+//     </div>
+//   `)
+// }
