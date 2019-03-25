@@ -1,5 +1,5 @@
 class TreasuresController < ApplicationController
-  before_action :set_treasure, only: [:show, :edit, :update, :destroy]
+  before_action :set_treasure, only: [:show, :next, :edit, :update, :destroy]
 
   def index
     @treasures = Treasure.all
@@ -16,6 +16,11 @@ class TreasuresController < ApplicationController
       f.html
       f.json {render json: @treasure}
     end
+  end
+
+  def next
+    @next_treasure = @treasure.next
+    render json: @next_treasure
   end
 
   def new

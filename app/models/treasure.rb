@@ -15,5 +15,15 @@ class Treasure < ApplicationRecord
 		end
 	end
 
+	def next
+		treasure = Treasure.where("id > ?", id).first
+
+		if treasure
+			treasure
+		else
+			Treasure.first
+		end
+
+	end
 
 end
