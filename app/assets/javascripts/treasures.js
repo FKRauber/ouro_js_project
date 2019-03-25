@@ -25,6 +25,10 @@ const bindClickHandlers = () => {
           $('#app-container').append(treasureHTML);
         });
   });
+  $(document).on('click', 'next_treasure', function() {
+    let id = $(this).attr('data_id');
+    fetch(`treasures/${id}/next`)
+  })
 }
 
 const getTreasures = () => {
@@ -90,8 +94,8 @@ Treasure.prototype.formatIndex = function() {
 Treasure.prototype.formatShow = function() {
   let treasureHTML = `
     <h3>${this.name}</h3>
+    <button class="next_treasure">Next</button>
     `
-
   return treasureHTML;
 }
 

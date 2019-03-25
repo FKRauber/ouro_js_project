@@ -57663,3 +57663,106 @@ Processing by StaticPagesController#home as HTML
 Completed 200 OK in 21ms (Views: 18.9ms | ActiveRecord: 0.1ms)
 
 
+Started GET "/" for 127.0.0.1 at 2019-03-25 11:14:23 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/frauber/.rvm/gems/ruby-2.5.3/gems/activerecord-5.2.1.1/lib/active_record/log_subscriber.rb:98
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.9ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11
+Completed 200 OK in 226ms (Views: 222.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/treasures.json" for 127.0.0.1 at 2019-03-25 11:14:24 -0400
+Processing by TreasuresController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11
+  [1m[36mTreasure Load (0.1ms)[0m  [1m[34mSELECT "treasures".* FROM "treasures"[0m
+  ↳ app/controllers/treasures_controller.rb:8
+[active_model_serializers]   [1m[36mTheory Load (0.1ms)[0m  [1m[34mSELECT "theories".* FROM "theories" WHERE "theories"."treasure_id" = ?[0m  [["treasure_id", 11]]
+[active_model_serializers]   ↳ app/controllers/treasures_controller.rb:8
+[active_model_serializers]   [1m[36mTheory Load (0.1ms)[0m  [1m[34mSELECT "theories".* FROM "theories" WHERE "theories"."treasure_id" = ?[0m  [["treasure_id", 12]]
+[active_model_serializers]   ↳ app/controllers/treasures_controller.rb:8
+[active_model_serializers]   [1m[36mTheory Load (0.1ms)[0m  [1m[34mSELECT "theories".* FROM "theories" WHERE "theories"."treasure_id" = ?[0m  [["treasure_id", 13]]
+[active_model_serializers]   ↳ app/controllers/treasures_controller.rb:8
+[active_model_serializers]   [1m[36mTheory Load (0.1ms)[0m  [1m[34mSELECT "theories".* FROM "theories" WHERE "theories"."treasure_id" = ?[0m  [["treasure_id", 14]]
+[active_model_serializers]   ↳ app/controllers/treasures_controller.rb:8
+[active_model_serializers]   [1m[36mTheory Load (0.2ms)[0m  [1m[34mSELECT "theories".* FROM "theories" WHERE "theories"."treasure_id" = ?[0m  [["treasure_id", 15]]
+[active_model_serializers]   ↳ app/controllers/treasures_controller.rb:8
+[active_model_serializers]   [1m[36mTheory Load (0.1ms)[0m  [1m[34mSELECT "theories".* FROM "theories" WHERE "theories"."treasure_id" = ?[0m  [["treasure_id", 16]]
+[active_model_serializers]   ↳ app/controllers/treasures_controller.rb:8
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (51.25ms)
+Completed 200 OK in 90ms (Views: 80.8ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/treasures/13.json" for 127.0.0.1 at 2019-03-25 11:14:25 -0400
+Processing by TreasuresController#show as JSON
+  Parameters: {"id"=>"13"}
+  [1m[36mTreasure Load (0.2ms)[0m  [1m[34mSELECT  "treasures".* FROM "treasures" WHERE "treasures"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/treasures_controller.rb:51
+  [1m[36mTheory Load (0.1ms)[0m  [1m[34mSELECT  "theories".* FROM "theories" WHERE "theories"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/treasures_controller.rb:55
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11
+[active_model_serializers]   [1m[36mTheory Load (0.1ms)[0m  [1m[34mSELECT "theories".* FROM "theories" WHERE "theories"."treasure_id" = ?[0m  [["treasure_id", 13]]
+[active_model_serializers]   ↳ app/controllers/treasures_controller.rb:17
+[active_model_serializers] Rendered TreasureSerializer with ActiveModelSerializers::Adapter::Attributes (1.37ms)
+Completed 200 OK in 5ms (Views: 2.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-25 11:14:27 -0400
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.4ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11
+Completed 200 OK in 22ms (Views: 19.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-25 11:16:32 -0400
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.3ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11
+Completed 200 OK in 67ms (Views: 64.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/treasures.json" for 127.0.0.1 at 2019-03-25 11:16:32 -0400
+Processing by TreasuresController#index as JSON
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11
+  [1m[36mTreasure Load (0.2ms)[0m  [1m[34mSELECT "treasures".* FROM "treasures"[0m
+  ↳ app/controllers/treasures_controller.rb:8
+[active_model_serializers]   [1m[36mTheory Load (0.1ms)[0m  [1m[34mSELECT "theories".* FROM "theories" WHERE "theories"."treasure_id" = ?[0m  [["treasure_id", 11]]
+[active_model_serializers]   ↳ app/controllers/treasures_controller.rb:8
+[active_model_serializers]   [1m[36mTheory Load (0.2ms)[0m  [1m[34mSELECT "theories".* FROM "theories" WHERE "theories"."treasure_id" = ?[0m  [["treasure_id", 12]]
+[active_model_serializers]   ↳ app/controllers/treasures_controller.rb:8
+[active_model_serializers]   [1m[36mTheory Load (0.1ms)[0m  [1m[34mSELECT "theories".* FROM "theories" WHERE "theories"."treasure_id" = ?[0m  [["treasure_id", 13]]
+[active_model_serializers]   ↳ app/controllers/treasures_controller.rb:8
+[active_model_serializers]   [1m[36mTheory Load (0.1ms)[0m  [1m[34mSELECT "theories".* FROM "theories" WHERE "theories"."treasure_id" = ?[0m  [["treasure_id", 14]]
+[active_model_serializers]   ↳ app/controllers/treasures_controller.rb:8
+[active_model_serializers]   [1m[36mTheory Load (0.1ms)[0m  [1m[34mSELECT "theories".* FROM "theories" WHERE "theories"."treasure_id" = ?[0m  [["treasure_id", 15]]
+[active_model_serializers]   ↳ app/controllers/treasures_controller.rb:8
+[active_model_serializers]   [1m[36mTheory Load (0.1ms)[0m  [1m[34mSELECT "theories".* FROM "theories" WHERE "theories"."treasure_id" = ?[0m  [["treasure_id", 16]]
+[active_model_serializers]   ↳ app/controllers/treasures_controller.rb:8
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (15.37ms)
+Completed 200 OK in 19ms (Views: 17.9ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/treasures/13.json" for 127.0.0.1 at 2019-03-25 11:16:33 -0400
+Processing by TreasuresController#show as JSON
+  Parameters: {"id"=>"13"}
+  [1m[36mTreasure Load (0.1ms)[0m  [1m[34mSELECT  "treasures".* FROM "treasures" WHERE "treasures"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/treasures_controller.rb:51
+  [1m[36mTheory Load (0.1ms)[0m  [1m[34mSELECT  "theories".* FROM "theories" WHERE "theories"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/treasures_controller.rb:55
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11
+[active_model_serializers]   [1m[36mTheory Load (0.1ms)[0m  [1m[34mSELECT "theories".* FROM "theories" WHERE "theories"."treasure_id" = ?[0m  [["treasure_id", 13]]
+[active_model_serializers]   ↳ app/controllers/treasures_controller.rb:17
+[active_model_serializers] Rendered TreasureSerializer with ActiveModelSerializers::Adapter::Attributes (1.77ms)
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.3ms)
+
+

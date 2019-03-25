@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
 
   get "/recent", to: "theories#recent"
+  get "/treasures/:id/next", to: 'treasures#next'
 
   get "/auth/github/callback", to: "sessions#omniauth"
   get "/signin", to: "sessions#new"
