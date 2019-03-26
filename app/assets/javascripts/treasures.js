@@ -40,31 +40,21 @@ const bindClickHandlers = () => {
     e.preventDefault();
     console.log('default prevented at new_treasure_form_btn');
     $('#app-container').append(newTreasureForm());
+
+    // SUBMIT TREASURE FORM - FROM INDEX
+    $("#new_treasure").on('submit', function(e) {
+      e.preventDefault();
+      console.log("creating new treasure")
+      const values = $(this).serialize()
+      $.post("/treasures", values).done(function(data) {
+        console.log(data)
+        const newTreasure = new Treasure(data)
+        $('#app-container').append(newTreasure)
+      })
+    })
   });
+
 }
-
-function newTreasureForm() {
-    $.ajax({
-      url: 'http://localhost:3000/treasures',
-      method: 'post',
-      dataType: 'json',
-      data: $('treasures#_form').serialize()
-    }).done(function() {
-      $('form').submit(function(event) {
-        event.preventDefault();
-        console.log("creating new treasure")
-
-        var values = $(this).serialize();
-        var posting = $.post('/treasures', values);
-        posting.done(function(data){
-          console.log("the data is...")
-        });
-      });
-      // document.querySelector('div#ajax-new-treasure-form').innerHTML = newTreasureForm
-      // console.log(newTreasureForm);
-
-    });
-  }
 
 const getTreasures = () => {
   fetch(`/treasures.json`)
@@ -120,27 +110,10 @@ Treasure.prototype.formatShow = function() {
 function newTreasureForm() {
   return (`
     <br><br>
-    <form>
-      <input id="treasure-title" type="text" name="title" placeholder="Name"></input><br>
+    <form id="new_treasure">
+      <input type="text" name="name" placeholder="Name"></input><br>
       <input type="text" name="description" placeholder="Description"></input><br><br>
-      <input type="submit" />
+      <input type="submit" id="submit_new_treasure" />
     </form>
   `)
 }
-
-
-//
-//
-//   let treasureTheories = this.theories.map(theory => {
-//     return (`
-//       <p>${theory.name}</p>
-//     `)
-//   }).join('')
-//
-//   return (`
-//     <div>
-//       <p><strong>${this.name}</strong></p>
-//       <p>${treasureTheories}</p>
-//     </div>
-//   `)
-// }

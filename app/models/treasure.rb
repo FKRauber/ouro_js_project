@@ -17,7 +17,6 @@ class Treasure < ApplicationRecord
 
 	def next
 		treasure = Treasure.where("id > ?", id).first
-
 		if treasure
 			treasure
 		else

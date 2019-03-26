@@ -30,7 +30,11 @@ class TreasuresController < ApplicationController
   def create
     @treasure = Treasure.create(treasure_params)
     @treasure.user_id = current_user.id
-    render json: @treasure, status: 201
+    if @treasure.save!
+      render json: @treasure
+    else
+      render 'new'
+    end
   end
 
   def edit
