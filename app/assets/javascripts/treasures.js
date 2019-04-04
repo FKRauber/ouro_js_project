@@ -11,6 +11,7 @@ const bindClickHandlers = () => {
     console.log('default prevented at all_treasures');
 
     getTreasures();
+
   });
 
   // SHOW TREASURE - FROM INDEX
@@ -35,23 +36,23 @@ const bindClickHandlers = () => {
     fetch(`treasures/${id}/next`)
   });
 
-  // NEW TREASURE FORM - FROM INDEX
-  $(document).on('click', '#new_treasure_form_btn', function(e) {
+  // SUBMIT TREASURE FORM - FROM INDEX
+  $("#new_treasure").on('submit', function(e) {
     e.preventDefault();
-    console.log('default prevented at new_treasure_form_btn');
-    $('#app-container').append(newTreasureForm());
-
-    // SUBMIT TREASURE FORM - FROM INDEX
-    $("#new_treasure").on('submit', function(e) {
-      e.preventDefault();
-      console.log("creating new treasure")
-      const values = $(this).serialize()
-      $.post("/treasures", values).done(function(data) {
-        console.log(data)
-        const newTreasure = new Treasure(data)
-        $('#app-container').append(newTreasure)
-      })
+    console.log("creating new treasure")
+    const values = $(this).serialize()
+    $.post("/treasures", values).done(function(data) {
+      const newTreasure = new Treasure(data)
+      const htmlToAdd = newTreasure.formatShow()
+      $('#app-container').html(htmlToAdd)
     })
+  });
+
+  // SORT LIST ALPHABETICALLY
+  $(document).on('click', '#list_sort_btn', function(e) {
+    e.preventDefault();
+    console.log('default prevented at sort_list_btn');
+    $('#app-container').append(getSortedTreasures());
   });
 
 }
@@ -60,14 +61,16 @@ const getTreasures = () => {
   fetch(`/treasures.json`)
     .then(res => res.json())
       .then(treasures => {
+        debugger;
+
         $('#app-container').html('')
         treasures.forEach(treasure => {
           let newTreasure = new Treasure(treasure)
           let treasureHTML = newTreasure.formatIndex();
           $('#app-container').append(treasureHTML);
         });
-        var b = $('<br><br><button id="new_treasure_form_btn" type="button" name="button" style="white-space: nowrap;">New Treasure</button>');
-        $('#app-container').append(b);
+        var l = $('<button id="list_sort_btn" type="button" name="button" style="white-space: nowrap;">Sort List</button>')
+        $('#app-container').append(l);
       });
   }
 
@@ -75,13 +78,14 @@ function Treasure(treasure) {
   this.id = treasure.id
   this.name = treasure.name
   this.description = treasure.description
-  this.user_id = treasure.user_id
   this.theories = treasure.theories
+  this.users = treasure.users
 }
 
 Treasure.prototype.formatIndex = function() {
   let treasureHTML = `
-    <a href="/treasures/${this.id}" class="show_link" data_id="${this.id}">${this.name}</a><br><br><br>
+    <a href="/treasures/${this.id}" class="show_link" data_id="${this.id}">${this.name}</a>
+    <p>${this.users[0].username}</p><br><br><br>
     `
   return treasureHTML;
 }
@@ -107,13 +111,25 @@ Treasure.prototype.formatShow = function() {
   return treasureHTML;
 }
 
-function newTreasureForm() {
-  return (`
-    <br><br>
-    <form id="new_treasure">
-      <input type="text" name="name" placeholder="Name"></input><br>
-      <input type="text" name="description" placeholder="Description"></input><br><br>
-      <input type="submit" id="submit_new_treasure" />
-    </form>
-  `)
-}
+const getSortedTreasures = () => {
+  fetch(`/treasures.json`)
+    .then(res => res.json())
+      .then(treasures => {
+        $('#app-container').html('')
+        treasures.sort(function(a, b) {
+          var nameA = a.name.toUpperCase();
+          var nameB = b.name.toUpperCase();
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        }).forEach(treasure => {
+          let newTreasure = new Treasure(treasure)
+          let treasureHTML = newTreasure.formatIndex();
+          $('#app-container').append(treasureHTML);
+        });
+      });
+  }

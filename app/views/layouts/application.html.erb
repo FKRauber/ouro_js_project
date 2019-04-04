@@ -16,6 +16,7 @@
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "My Profile", user_path(current_user) %></li>
           <li><%= link_to "Treasures", treasures_path, class: "all_treasures" %></li>
+          <li><%= link_to "New Treasure", new_treasure_path, id: "new_treasure_form_btn" %></li>
           <li><%= link_to "Log Out", signout_path, method: :delete %></li>
         <% else %>
           <li><%= link_to "Sign Up", new_user_path %></li>

@@ -1,3 +1,4 @@
+<div id="new_form">
 <%= form_for @treasure do |f| %>
 	<% if @treasure.errors.any? %>
 		<div id="error_explanation">
@@ -10,12 +11,12 @@
 		</div>
 	<% end %>
 
-	<%= f.label :name %><br><%= f.text_field :name, class: "form-control" %><br>
+	<%= f.label :name %>*<br><%= f.text_field :name, class: "form-control" %><br>
 	<%= f.label :description %><br><%= f.text_area :description, class: "form-control" %><br><br>
 
 	<%= f.fields_for :theories, @treasure.theories.build do |theory| %>
-		<%= theory.label :theory_name %><br><%= theory.text_field :name %><br>
-		<%= theory.label :theory_description %><br><%= theory.text_area :description %><br>
+		<%= theory.label :theory_name %>*<br><%= theory.text_field :name %><br>
+		<%= theory.label :theory_description %>*<br><%= theory.text_area :description %><br>
 		<%= theory.label :theory_issues %><br><%= theory.text_field :issues %><br>
 		<%= theory.label :theory_success %><br><%= theory.check_box :success %><br>
 		<%= theory.label :theory_prove_date %><br><%= theory.date_field :prove_date %><br>
@@ -26,3 +27,5 @@
 	<%= f.submit class: "btn btn-primary" %>
 
 <% end %>
+
+</div>

@@ -1,5 +1,6 @@
 class TreasuresController < ApplicationController
   before_action :set_treasure, only: [:show, :next, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
 
   def index
     @treasures = Treasure.all
@@ -28,7 +29,7 @@ class TreasuresController < ApplicationController
     @treasure.theories.build
   end
   def create
-    @treasure = Treasure.create(treasure_params)
+    @treasure = Treasure.new(treasure_params)
     @treasure.user_id = current_user.id
     if @treasure.save!
       render json: @treasure
